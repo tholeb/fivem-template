@@ -1,0 +1,14 @@
+/cache
+*.bkp
+/db
+*.log
+
+# Original streaming file
+resources/streamings
+
+# FiveM server build files
+/*.dll
+/*.exe
+citizen/
+icudtl.dat
+components.json
