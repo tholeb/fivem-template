@@ -1,0 +1,8 @@
+---
+name: Deploy the fivem server
+host: any
+
+tasks:
+  - name: "WIP"
+    debug:
+      msg: "WORK IN PROGRESS"
