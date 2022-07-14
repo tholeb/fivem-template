@@ -1,0 +1,9 @@
+ui:
+  - src/**/*.js
+
+core:
+  - resources/core/*
+  - resources/core/**/*
+
+sql:
+  - any: ["src/**/*.js"]
