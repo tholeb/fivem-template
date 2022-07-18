@@ -1,8 +1,35 @@
 ---
-name: Deploy the fivem server
-host: any
+- name: Setup a vanilla FXServer on home
+  hosts: all
+  remote_user: fivem # The user used to connect to the server (SSH)
+  gather_facts: yes
 
-tasks:
-  - name: "WIP"
-    debug:
-      msg: "WORK IN PROGRESS"
+  # Change this to your liking
+  vars:
+    user: tholeb # The user to run the server as
+    gitRepo: https://github.com/tholeb/fivem-template # replace this by server-data (fivem) repo link. If this is a private repo, use an ssh key to clone (see .ansible.cfg#private_key_file).
+    dest: ~/FXServer # Where you want the fivem server to be installed.
+
+  tasks:
+    - name: Create the FXServer directory
+      file:
+        path: "{{ dest }}/server"
+        state: directory
+        mode: 0754
+        owner: "{{ user }}"
+        group: "{{ user }}"
+      register: fxserver_dir_created
+
+    - name: untar Linux build
+      unarchive:
+        src: https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/5562-25984c7003de26d4a222e897a782bb1f22bebedd/fx.tar.xz
+        dest: "{{ fxserver_dir_created.path }}"
+        remote_src: yes
+
+    - name: Clone the fivem server
+      git:
+        repo: "{{ gitRepo }}"
+        dest: "{{ dest }}/server-data"
+        update: yes
+        track_submodules: yes
+        recursive: yes
