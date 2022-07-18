@@ -1,3 +1,6 @@
 [submodule "vendor/server-data"]
 	path = vendor/server-data
 	url = https://github.com/citizenfx/cfx-server-data.git
+[submodule "vendor/gtaClothingUtil"]
+	path = vendor/gtaClothingUtil
+	url = https://github.com/tholeb/gtaClothingUtil.git
